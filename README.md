@@ -59,10 +59,34 @@ $ CC=clang-9 CFLAGS='-DREUSEPORT_OPT=1 -Wno-deprecated-declarations' ./configure
 
 The ```memcached``` binary will be located in the memcached-sr directory.
 
+Further instructions
+---
+
+### TC egress hook
+
+BMC doesn't attach the tx_filter eBPF program to the egress hook of TC, it needs to be attached manually.
+
+To do so, you first need to make sure that the BPF is mounted, if it isn't you can mount it with the following command:
+```bash
+# mount -t bpf none /sys/fs/bpf/
+```
+
+Once BMC is running and the tx\_filter program has been pinned to /sys/fs/bpf/bmc\_tx\_filter, you can attach it using the tc command line:
+```bash
+# tc qdisc add dev <interface_name> clsact
+# tc filter add dev <interface_name> egress bpf object-pinned /sys/fs/bpf/bmc_tx_filter
+```
+
+After you are done using BMC, you can detach the program with these commands:
+```bash
+# tc filter del dev <interface_name> egress
+# tc qdisc del dev <interface_name> clsact
+```
+And unpin the program with ```# rm /sys/fs/bpf/bmc_tx_filter```
 
 License
 ---
 
-Files under the [bmc](bmc) directory are licensed under the [GNU Lesser General Public License version 2.1](LICENSE) license.
+Files under the [bmc](bmc) directory are licensed under the [GNU Lesser General Public License version 2.1](LICENSE).
 
 Files under the [memcached-sr](memcached-sr) directory are licensed under the [BSD-3-Clause BSD](LICENSE&#32;(Memcached&#32;customizations)) license.
