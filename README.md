@@ -1,6 +1,10 @@
 BMC
 ===
 
+### __The code for the [NSDI'21 paper](https://www.usenix.org/system/files/nsdi21-ghigoff.pdf) *"BMC: Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing"*.__
+
+BibTex entry available [here](#cite-this-work).
+
 BMC (BPF Memory Cache) is an in-kernel cache for memcached. It enables runtime, crash-safe extension of the Linux kernel to process specific memcached requests before the execution of the standard network stack. BMC does not require modification of neither the Linux kernel nor the memcached application. Running memcached with BMC improves throughput by up to 18x compared to the vanilla memcached application.
 
 Requirements
@@ -90,3 +94,20 @@ License
 Files under the [bmc](bmc) directory are licensed under the [GNU Lesser General Public License version 2.1](LICENSE).
 
 Files under the [memcached-sr](memcached-sr) directory are licensed under the [BSD-3-Clause BSD](LICENSE&#32;(Memcached&#32;customizations)) license.
+
+Cite this work
+---
+BibTex:
+```
+@inproceedings{265047,
+	title        = {{BMC}: Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing},
+	author       = {Yoann Ghigoff and Julien Sopena and Kahina Lazri and Antoine Blin and Gilles Muller},
+	year         = 2021,
+	month        = apr,
+	booktitle    = {18th {USENIX} Symposium on Networked Systems Design and Implementation ({NSDI} 21)},
+	publisher    = {{USENIX} Association},
+	pages        = {487--501},
+	isbn         = {978-1-939133-21-2},
+	url          = {https://www.usenix.org/conference/nsdi21/presentation/ghigoff}
+}
+```
