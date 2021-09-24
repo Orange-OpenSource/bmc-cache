@@ -70,7 +70,7 @@ Further instructions
 
 BMC doesn't attach the tx_filter eBPF program to the egress hook of TC, it needs to be attached manually.
 
-To do so, you first need to make sure that the BPF is mounted, if it isn't you can mount it with the following command:
+To do so, you first need to make sure that the BPF filesystem is mounted, if it isn't you can mount it with the following command:
 ```bash
 # mount -t bpf none /sys/fs/bpf/
 ```
